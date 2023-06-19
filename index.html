@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile Picture Upload</title>
+    <style>
+      .preview-container {
+        display: flex;
+        justify-content: center;
+        align-items: left;
+        margin-bottom: 20px;
+      }
+      *{
+        margin: 0%;
+        padding: 0%;
+      }
+      .preview-image {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Profile Picture Upload</h1>
+    <div class="preview-container">
+      <img id="preview" class="preview-image" src="" alt="Profile Picture Preview">
+    </div>
+    <input type="file" id="upload" accept="image/*">
+    <script>
+      const uploadInput = document.getElementById('upload');
+      const previewImage = document.getElementById('preview');
+      uploadInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            previewImage.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
+  </body>
+</html>
